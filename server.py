@@ -56,7 +56,7 @@ async def handle_data(reader, writer):
 
 
 async def main():
-    print("SocketCat Server, version beta_0001")
+    print("SocketCat Server, version v0.0.1")
     print("All rights not reserved.")
 
     assert trustid, "TRUST_ID must be set and cannot be empty"    
