@@ -3,7 +3,7 @@ from packet import HelloPacket, DataPacket
 from utils import PacketUtils
 
 trustid = os.getenv("TRUST_ID")
-
+# Should use new socketcat class method but lazy to refactor(lack of time)
 async def main():
     reader, writer = await asyncio.open_connection(
         '127.0.0.1', 20049)
