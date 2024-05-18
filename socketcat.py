@@ -15,8 +15,9 @@ class SocketCatServer:
 
     async def read_and_unpack(self):
         flag = await self.reader.read(1)
+        if not flag: return -1
         flag = struct.unpack("B", flag)[0]
-
+        
         if (flag == 0x00):  # 0x00 for HelloPacket
             client_trustid_len = await self.reader.read(1)
             client_trustid_len = struct.unpack("B", client_trustid_len)[0]
@@ -60,37 +61,35 @@ class SocketCatServer:
     
     async def __handle_hello(self):
         addr = self.writer.get_extra_info('peername')
-        client_trustid = self.read_and_unpack()
+        client_trustid = await self.read_and_unpack()
         
-        if (client_trustid != None):
-            if (client_trustid == self.trustid):
-                response = DataPacket(self.trustid, b'200').pack()
-                self.writer.write(response)
-                await self.writer.drain()
+        if (client_trustid == self.trustid):
+            response = DataPacket(self.trustid, b'200').pack()
+            self.writer.write(response)
+            await self.writer.drain()
 
-                print(f"Connection Established from {addr!r}")
-                while True:
-                    if await self.__handle_data() == -1: break # Auth complete, start listen data loop
+            print(f"Connection Established from {addr!r}")
+            while True:
+                if await self.__handle_data() == -1: break # Auth complete, start listen data loop
 
-            else:
-                print("Invalid TRUST_ID, Closing Connection...")
-                response = DataPacket(self.trustid, b'403').pack()
-                self.writer.write(response)
-                await self.writer.drain()
+        else:
+            print("Invalid TRUST_ID, Closing Connection...")
+            response = DataPacket(self.trustid, b'403').pack()
+            self.writer.write(response)
+            await self.writer.drain()
 
-        print(f"Connection to {addr!r} Closed\n")    
+        print(f"Connection to {addr!r} Closed")    
         self.writer.close()
         await self.writer.wait_closed() 
             
     
     
     async def __handle_data(self):
-        data = self.read_and_unpack()
-        
-        if (data == None):
-            return -1
+        data = await self.read_and_unpack()
+        if (data == -1): return data
         
         print(f"Received Data: {data!r}")
+        
         return 0
 
 
