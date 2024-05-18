@@ -70,7 +70,7 @@ class SocketCatServer:
 
             print(f"Connection Established from {addr!r}")
             while True:
-                if await self.__handle_data() == -1: break # Auth complete, start listen data loop
+                if await self._handle_data() == -1: break # Auth complete, start listen data loop
 
         else:
             print("Invalid TRUST_ID, Closing Connection...")
@@ -84,7 +84,7 @@ class SocketCatServer:
             
     
     
-    async def __handle_data(self):
+    async def _handle_data(self):
         data = await self.read_and_unpack()
         if (data == -1): return data
         
