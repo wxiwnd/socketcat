@@ -10,7 +10,7 @@ class PacketUtils:
         iv = secret[16:]
         cipher = AES.new(key, AES.MODE_CBC, iv)
         try:
-            return unpad(cipher.decrypt(data), AES.block_size).decode()
+            return unpad(cipher.decrypt(data), AES.block_size)
         except:
             print("Decrypt Failed")
         return None

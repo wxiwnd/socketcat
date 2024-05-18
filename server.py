@@ -1,12 +1,8 @@
 import asyncio, struct, hashlib, os
-from Crypto.Util.Padding import unpad
+from packet import DataPacket
 from utils import PacketUtils
 
 trustid = os.getenv("TRUST_ID")
-
-secret = hashlib.sha256(trustid.encode()).digest()
-key = secret[:16]
-iv = secret[16:]
 
 async def handle_hello(reader, writer):
     addr = writer.get_extra_info('peername')
@@ -22,14 +18,19 @@ async def handle_hello(reader, writer):
         client_trustid = PacketUtils.decrypt(trustid, client_trustid)
 
         if (client_trustid == trustid):
+            response = DataPacket(trustid, b'200').pack()
+            writer.write(response)
+            await writer.drain()
+
             print(f"Connection Established from {addr!r}")
             while True:
                 if await handle_data(reader, writer) == -1: break
 
         else:
             print("Invalid TRUST_ID, Closing Connection...")
-
-
+            response = DataPacket(trustid, b'403').pack()
+            writer.write(response)
+            await writer.drain()
     else:
         print("Malformed Hello Packet, Closing Connection...")
     
@@ -69,6 +70,7 @@ async def main():
 
     async with server:
         await server.serve_forever()
+
 try:
     asyncio.run(main())
 except KeyboardInterrupt:

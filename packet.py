@@ -36,7 +36,7 @@ class DataPacket(Packet):
     def pack(self):
         cipher = AES.new(self.key, AES.MODE_CBC, self.iv)
         data_flag = struct.pack("B", 0x01)  # 0x01 for data packet
-        data = cipher.encrypt(pad(self.original_data.encode(), AES.block_size))
+        data = cipher.encrypt(pad(self.original_data, AES.block_size))
         data_len = struct.pack("I", len(data))
         data_packet = data_flag + data_len + data
 
