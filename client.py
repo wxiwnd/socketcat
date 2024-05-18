@@ -32,10 +32,13 @@ async def main():
     
     writer.write(datapack)
     await writer.drain()
+    print(f'Send data: {datapack!r}')
     writer.write(datapack)
     await writer.drain()
+    print(f'Send data: {datapack!r}')
     writer.write(datapack)
     await writer.drain()
+    print(f'Send data: {datapack!r}')
 
     print('Close the connection')
     writer.close()
