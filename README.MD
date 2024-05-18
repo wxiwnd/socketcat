@@ -50,3 +50,5 @@ Client Side:
 PyTest:
 
 <img src="https://s2.loli.net/2024/05/19/lIH48kesBcOTmjh.png" alt=pytest width="70%">
+
+<img src="https://s2.loli.net/2024/05/19/fBk3R8rZxHOIjun.png" alt=servertest width="70%">
