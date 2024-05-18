@@ -1,6 +1,8 @@
 # SocketCat
 Client and service implementation of socket communication based on Python asyncio
 
+Packet Defination See Doc/*.pdf
+
 ## Quick Start
 ### Setup enviroment
 
