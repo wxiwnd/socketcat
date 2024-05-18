@@ -8,7 +8,7 @@ async def main():
     reader, writer = await asyncio.open_connection(
         '127.0.0.1', 20049)
     
-    hello_packet = HelloPacket(trustid + '1')
+    hello_packet = HelloPacket(trustid)
     writer.write(hello_packet.pack())
     await writer.drain()
 

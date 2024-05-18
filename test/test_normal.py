@@ -5,7 +5,6 @@ from packet import HelloPacket, DataPacket
 from utils import PacketUtils
 
 
-# Build an invalid TRUST_ID
 trustid = os.getenv("TRUST_ID")
 
 

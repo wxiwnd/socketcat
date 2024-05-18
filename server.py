@@ -15,7 +15,7 @@ async def handle_hello(reader, writer):
         client_trustid_len = struct.unpack("B", client_trustid_len)[0]
         client_trustid = await reader.read(client_trustid_len)
 
-        client_trustid = PacketUtils.decrypt(trustid, client_trustid)
+        client_trustid = PacketUtils.decrypt(trustid, client_trustid).decode()
 
         if (client_trustid == trustid):
             response = DataPacket(trustid, b'200').pack()
