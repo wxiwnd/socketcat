@@ -22,11 +22,12 @@ trustid = "very_secret_str"
 sc = SocketCatServer('0.0.0.0', 20049, trustid)
 ```
 
-**Start()**
+### Start()
 
 Start SocketCat Server. You can define multiple SocketCatServer Objects without start.
 
-**read_and_unpack()**
+
+### read_and_unpack()
 
 Read the next packet from reader stream, then return the decrypt data.
 
@@ -36,26 +37,29 @@ Else if the packet is a DataPacket, it will return the decrypted data(Normally n
 
 Else if the data is not a valid packet, return None.
 
+
 ### Private Methods
 Internal implementation details.
 
 ## packet.py
 The main code of packet definiation and encryption.
 
-**HelloPacket** & **DataPacket**
+
+### **HelloPacket** & **DataPacket**
 
 See [SchematicsPDF](./SocketCat_schematics.pdf)
 
-**pack()**
+### pack()
 
 pack the packet and encrypt.
 
 Return a packet.
 
+
 ## utils.py
 The main code of utils functions.
 
-**decrypt()**
+### decrypt()
 A static method, decrypt data.
 ```python
 from utils import PacketUtils
@@ -75,7 +79,7 @@ Inherited from SocketCatServer.
 
 This is a jsonRPC.
 
-**add_function()**
+### add_function()
 
 Add a function in RPCServer's known functions.
 
