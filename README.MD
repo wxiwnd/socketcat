@@ -1,7 +1,11 @@
 # SocketCat
 Client and service implementation of socket communication based on Python asyncio
 
-Packet Defination See Doc/*.pdf
+### Documuments
+[Packet Defination](docs/SocketCat_schematics.pdf)
+
+ 
+[Full Document](docs/doc.md)
 
 ## Quick Start
 ### Setup enviroment
@@ -19,7 +23,7 @@ conda create --name SocketCat python=3.10 pytest pytest-asyncio pycryptodome
 
 **Using Pip**
 ```shell
-pip install pytest pycryptodome
+pip install pytest pytest-asyncio pycryptodome
 ```
 
 ### Start Test
