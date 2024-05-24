@@ -43,18 +43,3 @@ TRUST_ID=<placeholder> python server.py
 cd test
 TRUST_ID=<placeholder> pytest
 ```
-
-### Test Screenshots:
-Server Side:
-
-<img src="https://s2.loli.net/2024/05/19/czJ8BT7REPuDpCg.png" alt=server width="70%">
-
-Client Side:
-
-<img src="https://s2.loli.net/2024/05/19/htMU1Qpoy5fCVNl.png" alt=client width="70%">
-
-PyTest:
-
-<img src="https://s2.loli.net/2024/05/19/lIH48kesBcOTmjh.png" alt=pytest width="70%">
-
-<img src="https://s2.loli.net/2024/05/19/fBk3R8rZxHOIjun.png" alt=servertest width="70%">
