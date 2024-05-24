@@ -4,7 +4,7 @@
 The main code of socketcat implement.
 
 ### class SocketCatServer
-**Constructor Defination**
+**Constructor Definition**
 ```python
 def __init__(self, addr:str, port:int, trustid):
     self.reader = None
