@@ -1,6 +1,11 @@
 # SocketCat
 Client and service implementation of socket communication based on Python asyncio
 
+# TODO
+1.CLI
+2.Multiple Encryption Methods Support
+
+
 ### Documuments
 [Packet Defination](docs/SocketCat_schematics.pdf)
 
