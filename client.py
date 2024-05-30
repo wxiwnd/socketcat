@@ -2,11 +2,10 @@ import asyncio, struct, os
 from packet import HelloPacket, DataPacket
 from utils import PacketUtils
 
-trustid = os.getenv("TRUST_ID")
 # Should use new socketcat class method but lazy to refactor(lack of time)
-async def main():
+async def main(address="localhost", port=20049, trustid=os.getenv("TRUST_ID")):
     reader, writer = await asyncio.open_connection(
-        '127.0.0.1', 20049)
+        address, port)
     
     hello_packet = HelloPacket(trustid)
     writer.write(hello_packet.pack())
@@ -44,4 +43,8 @@ async def main():
     writer.close()
     await writer.wait_closed()
 
-asyncio.run(main())
+def connect(address, port, trust_id):
+    asyncio.run(main(address, port, trust_id))
+
+if __name__ == '__main__':
+    asyncio.run(main())
