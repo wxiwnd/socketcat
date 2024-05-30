@@ -2,7 +2,7 @@ import os
 from socketcat import SocketCatServer
 
 
-trustid = os.getenv("TRUST_ID")
+trustid = 'very_trust_id'
 
 main_server = SocketCatServer('0.0.0.0', 20049, trustid)
 main_server.start()

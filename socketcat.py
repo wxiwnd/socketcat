@@ -1,5 +1,5 @@
-import asyncio, struct
-from packet import DataPacket
+import asyncio, struct, aioconsole
+from packet import DataPacket, HelloPacket
 from utils import PacketUtils
 
 class SocketCatServer:
@@ -9,9 +9,26 @@ class SocketCatServer:
         self.trustid = trustid
         self.listen_addr:str = addr
         self.listen_port:int = port
- 
+        self.runner = asyncio.Runner()
+
+    def __del__(self):
+        self.runner.close()
+
     def start(self):
-        asyncio.run(self.__create_server())
+        self.runner.run(self.__create_server())
+
+    
+    async def send_packet(self, type, data:bytes = ''):
+        if (type == 'hello'):
+            data = 'Hello'
+            packet = HelloPacket(self.trustid)
+
+        if (type == 'data'):
+            packet = DataPacket(self.trustid, data)
+
+        print(f'Send Data: {data!r}')
+        self.writer.write(packet.pack())
+        await self.writer.drain()
 
     async def read_and_unpack(self):
         flag = await self.reader.read(1)
@@ -86,15 +103,54 @@ class SocketCatServer:
     
     async def _handle_data(self):
         data = await self.read_and_unpack()
-        if (data == -1): return data
+        if (data == -1): 
+            await self.send_packet('data', b'404')
+            return data
+        else:   
+            print(f"Received Data: {data!r}")
+            await self.send_packet('data', b'200')
+            return 0
+
+
+class SocketCatClient(SocketCatServer):
+    def __init__(self, addr: str, port: int, trustid):
+        super().__init__(addr, port, trustid)
+        # Placeholder
+    
+    async def __open_connection(self):
+        self.reader, self.writer = await asyncio.open_connection(self.listen_addr, self.listen_port)
+        await self.send_packet('hello')
+        response = await self.read_and_unpack()
         
-        print(f"Received Data: {data!r}")
-        
-        return 0
+        if (response == b'200'):
+            print("Connection Established")
+
+        else:
+            print("Failed to connect remote")
+        return
 
 
+    async def __start_interactive(self):
+        while True:
+            try:
+                word = await aioconsole.ainput(">> ")
 
+                if (word == 'quit'):
+                    print("\nQuiting...")
+                    return
+                else:
+                    await self.send_packet('data', word.encode())
+                    response = await self.read_and_unpack()
+                    print(response.decode())
 
+            except asyncio.CancelledError:
+                print("\nQuiting...")
+                return
 
+    def interactive(self):
+        self.runner.run(self.__start_interactive())
+
+    def open_connection(self):
+        self.runner.run(self.__open_connection())
 
 
