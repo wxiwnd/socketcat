@@ -17,18 +17,18 @@ Client and service implementation of socket communication based on Python asynci
 
 **Using Conda**
 
-python version >= 3.8
+python version >= 3.11
 ```shell
-conda install pytest pytest-asyncio pycryptodome
+conda install aioconsole pytest pyetest-asyncio pycryptodome
 ```
 or create a new virtual enviroment:
 ```shell
-conda create --name SocketCat python=3.10 pytest pytest-asyncio pycryptodome
+conda create --name SocketCat python=3.11 aioconsole pytest pytest-asyncio pycryptodome
 ```
 
 **Using Pip**
 ```shell
-pip install pytest pytest-asyncio pycryptodome
+pip install aioconsole pytest pytest-asyncio pycryptodome
 ```
 
 **Build & use package**
