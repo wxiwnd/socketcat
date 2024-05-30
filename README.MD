@@ -2,8 +2,8 @@
 Client and service implementation of socket communication based on Python asyncio
 
 # TODO
-1.CLI
-2.Multiple Encryption Methods Support
+1. CLI
+2. Multiple Encryption Methods Support
 
 
 ### Documuments
@@ -19,7 +19,7 @@ Client and service implementation of socket communication based on Python asynci
 
 python version >= 3.8
 ```shell
-conda install pytest pyetest-asyncio pycryptodome
+conda install pytest pytest-asyncio pycryptodome
 ```
 or create a new virtual enviroment:
 ```shell
@@ -29,6 +29,18 @@ conda create --name SocketCat python=3.10 pytest pytest-asyncio pycryptodome
 **Using Pip**
 ```shell
 pip install pytest pytest-asyncio pycryptodome
+```
+
+**Build & use package**
+Prepare [poetry >= 1.8](https://python-poetry.org/)
+
+And run:  
+``` shell
+poetry install
+```
+To build package:  
+``` shell
+poetry build
 ```
 
 ### Start Test
