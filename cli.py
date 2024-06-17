@@ -1,8 +1,7 @@
 import argparse
 import os
 
-from socketcat import SocketCatServer
-from client import connect
+from socketcat import SocketCatServer, SocketCatClient
 
 def start_server(address, port, trust_id):
     print(f"Starting server at {address}:{port}")
@@ -11,7 +10,10 @@ def start_server(address, port, trust_id):
 
 def start_client(address, port, trust_id):
     print(f"Starting client at {address}:{port}")
-    connect(address, port, trust_id)
+    scc = SocketCatClient(address, port, trust_id)
+    scc.open_connection()
+    scc.interactive()
+
 
 def main():
     parser = argparse.ArgumentParser(description='SocketCat CLI')
