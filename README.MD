@@ -2,8 +2,8 @@
 Client and service implementation of socket communication based on Python asyncio
 
 # TODO
-1.CLI
-2.Multiple Encryption Methods Support
+1. CLI
+2. Multiple Encryption Methods Support
 
 
 ### Documuments
@@ -29,6 +29,18 @@ conda create --name SocketCat python=3.11 aioconsole pytest pytest-asyncio pycry
 **Using Pip**
 ```shell
 pip install aioconsole pytest pytest-asyncio pycryptodome
+```
+
+**Build & use package**
+Prepare [poetry >= 1.8](https://python-poetry.org/)
+
+And run:  
+``` shell
+poetry install
+```
+To build package:  
+``` shell
+poetry build
 ```
 
 ### Start Test
