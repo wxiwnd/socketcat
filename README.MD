@@ -60,3 +60,4 @@ TRUST_ID=<placeholder> python server.py
 cd test
 TRUST_ID=<placeholder> pytest
 ```
+> Yay, you ran our software perfectly, great job!
