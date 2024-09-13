@@ -7,7 +7,7 @@ Client and service implementation of socket communication based on Python asynci
 
 
 ### Documuments
-[Packet Defination](docs/SocketCat_schematics.pdf)
+[Packet Definition](docs/SocketCat_schematics.pdf)
 
  
 [Full Document](docs/doc.md)
